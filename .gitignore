@@ -11,3 +11,11 @@
 *.lai
 *.la
 *.a
+
+GDIBmp/Debug
+GDIBmp/Release
+*.ncb
+*.user
+*.suo
+*.ilk
+*.pdb
