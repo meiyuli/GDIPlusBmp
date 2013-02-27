@@ -16,13 +16,11 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// Chinese (P.R.C.) resources
+// Chinese (Simplified, PRC) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
-#ifdef _WIN32
 LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
 #pragma code_page(936)
-#endif //_WIN32
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -71,18 +69,6 @@ END
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON                    "res\\GDIBmp.ico"
-#endif    // Chinese (P.R.C.) resources
-/////////////////////////////////////////////////////////////////////////////
-
-
-/////////////////////////////////////////////////////////////////////////////
-// English (U.S.) resources
-
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
-#ifdef _WIN32
-LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
-#pragma code_page(1252)
-#endif //_WIN32
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -97,16 +83,17 @@ FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,263,179,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,263,179,50,14
-    PUSHBUTTON      "OPEN FILE",IDC_BTN_OPEN,28,148,99,21
-    PUSHBUTTON      "SEND DATA",IDC_BTN_COMM,187,148,99,21
+    PUSHBUTTON      "打开",IDC_BTN_OPEN,28,148,99,21
+    PUSHBUTTON      "发送",IDC_BTN_COMM,187,148,99,21
     COMBOBOX        IDC_COMBO_COMM,52,7,43,30,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
-    LTEXT           "LOCAL COM",IDC_STATIC,8,9,44,8
-    GROUPBOX        "PICTURE INFO",IDC_STATIC,7,42,89,54,BS_CENTER
+    LTEXT           "本地串口:",IDC_STATIC,8,9,44,8
+    GROUPBOX        "发送图片大小(像素)",IDC_STATIC,7,42,89,54,BS_CENTER
     EDITTEXT        IDC_EDIT_WIDTH,43,55,45,14,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDIT_HEIGHT,43,77,45,14,ES_AUTOHSCROLL
-    LTEXT           "WIDTH",IDC_STATIC,13,58,27,8
-    LTEXT           "HEIGHT",IDC_STATIC,13,80,29,8
+    LTEXT           "宽度:",IDC_STATIC,13,58,27,8
+    LTEXT           "长度:",IDC_STATIC,13,80,29,8
     CONTROL         "Custom1",IDC_CUSTOM_SHOW,"MFCBitmapViewCtrl",WS_TABSTOP,107,7,206,130
+    LTEXT           "图片大小（X: Y:）",IDC_SRC_PIC_SIZE,211,138,102,8
 END
 
 
@@ -130,7 +117,7 @@ VS_VERSION_INFO VERSIONINFO
 BEGIN
     BLOCK "StringFileInfo"
     BEGIN
-        BLOCK "040904e4"
+        BLOCK "080404e4"
         BEGIN
             VALUE "CompanyName", "TODO: <Company name>"
             VALUE "FileDescription", "TODO: <File description>"
@@ -144,7 +131,7 @@ BEGIN
     END
     BLOCK "VarFileInfo"
     BEGIN
-        VALUE "Translation", 0x409, 1252
+        VALUE "Translation", 0x804, 1252
     END
 END
 
@@ -155,7 +142,7 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO 
+GUIDELINES DESIGNINFO
 BEGIN
     IDD_GDIBMP_DIALOG, DIALOG
     BEGIN
@@ -167,7 +154,7 @@ BEGIN
 END
 #endif    // APSTUDIO_INVOKED
 
-#endif    // English (U.S.) resources
+#endif    // Chinese (Simplified, PRC) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

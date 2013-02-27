@@ -48,6 +48,11 @@ protected:
 	 *	\brief 加载数据
 	 */
 	int Load(CImage &image);
+
+	/*
+	 *	发送图片头
+	 */
+	int SendHeader();
 private:
 	LPBYTE m_lpBits;
 	DWORD   m_lSize;

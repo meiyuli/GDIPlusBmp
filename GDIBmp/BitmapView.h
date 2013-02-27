@@ -14,6 +14,10 @@ public:
 	BOOL SetBitmap(DWORD dwSize,void* lpBits);
 
 	BOOL SetBitmap(int nWidth,int nHeight,void * lpBits);
+
+	int LoadPicture(CString &filePath);
+
+	void DrawImage(int x, int y, CDC* pDC);
 public:
 	BOOL Create(CWnd* pParentWnd,const RECT& rect, UINT nID, DWORD dwStyle = WS_VISIBLE);
 
@@ -23,7 +27,12 @@ protected:
 
 protected:
 	CBitmap m_Bitmap;
-
+	/*
+	 *	Com组件图片接口
+	 */
+	IPicture *pPicture;
+	
+	IStream *pStream;
 protected:
 	afx_msg void OnPaint();
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);

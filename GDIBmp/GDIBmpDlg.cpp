@@ -129,6 +129,7 @@ void CGDIBmpDlg::OnBtnOpenClick()
 	if( fileDlg.DoModal ()==IDOK )
 	{
 		m_filePath = fileDlg.GetPathName();
+		m_BmpView.LoadPicture(m_filePath);
 		CImage image;
 		image.Load(m_filePath);
 		int nWidth = image.GetWidth();	// 获取图像宽度
@@ -141,6 +142,9 @@ void CGDIBmpDlg::OnBtnOpenClick()
 		m_Width.SetWindowText(strWidth);
 		m_Height.SetWindowText(strHeight);
 
+		CString srcSize;
+		srcSize.Format(L"图片大小(X:%d  Y:%d)",nWidth,nHeight);
+		((CStatic*)GetDlgItem(IDC_SRC_PIC_SIZE))->SetWindowText(srcSize);
 // 		LPBYTE lpBits = (LPBYTE)image.GetPixelAddress(0,nHeight-1);
 // 		CFile file;
 // 		if(!file.Open(_T("RGB.txt"),CFile::modeWrite | CFile::modeCreate))
@@ -333,8 +337,18 @@ int CGDIBmpDlg::Load(CImage &image)
 				sizeof(m_lpBits),(void*)&piexy,sizeof(PIEXY_VALUE));
 		}
 	}
-	m_BmpView.SetBitmap(nWidth,nHeight,m_lpBits);
+	//m_BmpView.SetBitmap(nWidth,nHeight,m_lpBits);
 	file.Write((void*)m_lpBits,nHeight*nWidth*sizeof(PIEXY_VALUE));
 	file.Close();
 	return 1;
+}
+
+int CGDIBmpDlg::SendHeader()
+{
+	UINT nHeight;
+	UINT nWidth;
+	nHeight = GetDlgItemInt(IDC_EDIT_HEIGHT);
+	nWidth = GetDlgItemInt(IDC_EDIT_WIDTH);
+
+
 }
