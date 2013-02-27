@@ -350,5 +350,5 @@ int CGDIBmpDlg::SendHeader()
 	nHeight = GetDlgItemInt(IDC_EDIT_HEIGHT);
 	nWidth = GetDlgItemInt(IDC_EDIT_WIDTH);
 
-
+	return 0;
 }
