@@ -5,6 +5,7 @@
 #include "stdafx.h"
 #include "GDIBmp.h"
 #include "GDIBmpDlg.h"
+#include "Rgb2YCbCr.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -191,6 +192,13 @@ void CGDIBmpDlg::OnBnClickedBtnComm()
 	Load(image);
 
 	m_CommCtrl.CloseCom();
+
+#if 1
+	// convert RGB To YCrCb
+	LPBYTE yuv = new BYTE[m_lSize];
+	CRgb2YCbCr::Instance()->RGB2YCbCr(m_lpBits,m_lSize,yuv);
+#endif
+
 	CString str;
 	m_Comm.GetLBText(m_Comm.GetCurSel(),str);
 	if(m_CommCtrl.OpenCom(str) < 0)
@@ -212,7 +220,19 @@ void CGDIBmpDlg::OnBnClickedBtnComm()
 
 	CloseHandle(hThread);
 
-	//SendBufferSize();
+	//SendBufferSize();			// 发送缓冲区大小
+	//SendHeader();				// 发送缓冲区数据头（图片宽度和高度）
+
+#if 0
+	// convert RGB To YCrCb
+	LPBYTE yuv = new BYTE[m_lSize];
+	CRgb2YCbCr::Instance()->RGB2YCbCr(m_lpBits,m_lSize,yuv);
+#endif
+
+// 	// convert RGB To YCrCb
+// 	LPBYTE yuv = new BYTE[m_lSize];
+// 	CRgb2YCbCr::Instance()->RGB2YCbCr(m_lpBits,m_lSize,yuv);
+
 	// 写图片数据
 	int nBufferSize;
 	nBufferSize = m_lSize;
@@ -220,13 +240,14 @@ void CGDIBmpDlg::OnBnClickedBtnComm()
 	int i = 0;
 	while(nBufferSize >= SIZE_SEND_BUFFER)
 	{
-		m_CommCtrl.WriteCom(m_lpBits + i*SIZE_SEND_BUFFER,SIZE_SEND_BUFFER);
+		m_CommCtrl.WriteCom(yuv + i*SIZE_SEND_BUFFER,SIZE_SEND_BUFFER);
 		nBufferSize -= SIZE_SEND_BUFFER;
 		i++;
 	}
-	m_CommCtrl.WriteCom(m_lpBits+i*SIZE_SEND_BUFFER,nBufferSize);
+	m_CommCtrl.WriteCom(yuv+i*SIZE_SEND_BUFFER,nBufferSize);
 
 	m_CommCtrl.CloseCom();
+	delete yuv;
 }
 
 unsigned CGDIBmpDlg::ThreadFunc(void* arg)
@@ -349,6 +370,9 @@ int CGDIBmpDlg::SendHeader()
 	UINT nWidth;
 	nHeight = GetDlgItemInt(IDC_EDIT_HEIGHT);
 	nWidth = GetDlgItemInt(IDC_EDIT_WIDTH);
+	DWORD dwHeader;
+	dwHeader = (nHeight & 0x0000FFFF) << 16 + nWidth & 0x0000FFFF;
 
+	m_CommCtrl.WriteCom((void*)&dwHeader,sizeof(DWORD));
 	return 0;
 }

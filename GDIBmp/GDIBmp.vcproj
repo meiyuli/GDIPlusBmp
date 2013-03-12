@@ -227,6 +227,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Rgb2YCbCr.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\stdafx.cpp"
 				>
 				<FileConfiguration
@@ -274,6 +278,10 @@
 			</File>
 			<File
 				RelativePath=".\Resource.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Rgb2YCbCr.h"
 				>
 			</File>
 			<File
